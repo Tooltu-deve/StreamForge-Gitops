@@ -1,13 +1,13 @@
 name: transcode-worker
-image: { repo: "252773257724.dkr.ecr.ap-southeast-1.amazonaws.com/streamforge-dev/transcode-worker", tag: "dev" }
-serviceAccount: { roleArn: "arn:aws:iam::252773257724:role/sf-transcode-worker-29a5163828ba784d819b00ecb0" }
+image: {repo: "252773257724.dkr.ecr.ap-southeast-1.amazonaws.com/streamforge-dev/transcode-worker", tag: "sha-78734f89d7ba"}
+serviceAccount: {roleArn: "arn:aws:iam::252773257724:role/sf-transcode-worker-29a5163828ba784d819b00ecb0"}
 env:
   REGION: ap-southeast-1
   RAW_BUCKET: "streamforge-dev-raw"
   TRANSCODED_BUCKET: "streamforge-dev-transcoded"
   TABLE_NAME: "streamforge-dev-metadata"
   QUEUE_URL: "https://sqs.ap-southeast-1.amazonaws.com/252773257724/streamforge-dev-transcode"
-nodeSelector: { workload: transcode }
+nodeSelector: {workload: transcode}
 tolerations:
-  - { key: dedicated, operator: Equal, value: transcode, effect: NoSchedule }
-keda: { enabled: true, maxReplicas: 4, queueUrl: "https://sqs.ap-southeast-1.amazonaws.com/252773257724/streamforge-dev-transcode" }
+  - {key: dedicated, operator: Equal, value: transcode, effect: NoSchedule}
+keda: {enabled: true, maxReplicas: 4, queueUrl: "https://sqs.ap-southeast-1.amazonaws.com/252773257724/streamforge-dev-transcode"}
