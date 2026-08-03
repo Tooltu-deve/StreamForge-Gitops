@@ -1,6 +1,6 @@
 name: catalog
-image: { repo: "252773257724.dkr.ecr.ap-southeast-1.amazonaws.com/streamforge-dev/catalog", tag: "dev" }
-serviceAccount: { roleArn: "arn:aws:iam::252773257724:role/sf-catalog-16260afc34b47e46a803652078" }
+image: {repo: "252773257724.dkr.ecr.ap-southeast-1.amazonaws.com/streamforge-dev/catalog", tag: "sha-6d3a4ba01945"}
+serviceAccount: {roleArn: "arn:aws:iam::252773257724:role/sf-catalog-16260afc34b47e46a803652078"}
 env:
   REGION: ap-southeast-1
   TABLE_NAME: "streamforge-dev-metadata"

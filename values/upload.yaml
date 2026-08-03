@@ -1,5 +1,5 @@
 name: upload
-image: {repo: "252773257724.dkr.ecr.ap-southeast-1.amazonaws.com/streamforge-dev/upload", tag: "sha-78734f89d7ba"}
+image: {repo: "252773257724.dkr.ecr.ap-southeast-1.amazonaws.com/streamforge-dev/upload", tag: "sha-6d3a4ba01945"}
 serviceAccount: {roleArn: "arn:aws:iam::252773257724:role/sf-upload-f74fcbe1eadea9fee8797ce381"}
 env:
   REGION: ap-southeast-1
