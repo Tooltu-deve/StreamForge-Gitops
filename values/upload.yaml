@@ -1,0 +1,9 @@
+name: upload
+image: { repo: "252773257724.dkr.ecr.ap-southeast-1.amazonaws.com/streamforge-dev/upload", tag: "dev" }
+serviceAccount: { roleArn: "arn:aws:iam::252773257724:role/sf-upload-f74fcbe1eadea9fee8797ce381" }
+env:
+  REGION: ap-southeast-1
+  RAW_BUCKET: "streamforge-dev-raw"
+  TABLE_NAME: "streamforge-dev-metadata"
+  COGNITO_POOL_ID: "ap-southeast-1_pGPDb4nUq"
+  COGNITO_CLIENT_ID: "hgbtcrd7b286h9n5vpo2edc5q"
