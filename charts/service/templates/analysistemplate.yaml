@@ -1,0 +1,22 @@
+{{- if .Values.rollout.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: {{ .Values.name }}-success-rate
+  namespace: {{ .Values.namespace }}
+spec:
+  args:
+    - name: canary-hash
+  metrics:
+    - name: success-rate
+      interval: {{ .Values.rollout.analysis.interval }}
+      failureLimit: {{ .Values.rollout.analysis.failureLimit }}
+      successCondition: "result[0] >= {{ .Values.rollout.analysis.successRate }}"
+      provider:
+        prometheus:
+          address: http://prometheus-operated.monitoring.svc.cluster.local:9090
+          query: |
+            sum(rate(http_requests_total{status!~"5..",rollouts_pod_template_hash="{{ `{{args.canary-hash}}` }}"}[1m]))
+            /
+            sum(rate(http_requests_total{rollouts_pod_template_hash="{{ `{{args.canary-hash}}` }}"}[1m]))
+{{- end }}

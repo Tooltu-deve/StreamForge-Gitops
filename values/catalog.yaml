@@ -4,3 +4,5 @@ serviceAccount: {roleArn: "arn:aws:iam::252773257724:role/sf-catalog-16260afc34b
 env:
   REGION: ap-southeast-1
   TABLE_NAME: "streamforge-dev-metadata"
+rollout:
+  enabled: true 

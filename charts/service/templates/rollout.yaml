@@ -1,42 +1,50 @@
-{{- if not .Values.rollout.enabled }}
-apiVersion: apps/v1
-kind: Deployment
+{{- if .Values.rollout.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: {{ .Values.name }}
   namespace: {{ .Values.namespace }}
 spec:
   replicas: {{ .Values.replicas }}
-  selector: 
-    matchLabels: 
+  selector:
+    matchLabels:
       app: {{ .Values.name }}
   template:
     metadata:
-      labels: 
+      lables:
         app: {{ .Values.name }}
-    spec: 
+    spec:
       serviceAccountName: {{ .Values.name }}
       containers:
         - name: {{ .Values.name }}
           image: "{{ .Values.image.repo }}:{{ .Values.image.tag }}"
           ports:
             - containerPort: {{ .Values.containerPort }}
-          env: 
+          env:
             {{- range $k, $v := .Values.env }}
             - name: {{ $k }}
               value: {{ $v | quote }}
             {{- end }}
           livenessProbe:
-            httpGet:
-              path: /healthz
-              port: {{ .Values.containerPort }}
+            httpGet: { path: /healthz, port: {{ .Values.containerPort }} }
             initialDelaySeconds: 5
             periodSeconds: 10
           readinessProbe:
-            httpGet:
-              path: /readyz
-              port: {{ .Values.containerPort }}
+            httpGet: { path: /readyz, port: {{ .Values.containerPort }} }
             initialDelaySeconds: 5
             periodSeconds: 10
-          resources: 
+          resources:
             {{- toYaml .Values.resources | nindent 12 }}
-{{- end }}
+  strategy:
+    canary:
+      steps:
+        {{- toYaml .Values.rollout.steps | nindent 8 }}
+      analysis:
+        templates:
+          - templateName: {{ .Values.name }}-success-rate
+        startingStep: 1
+        args:
+          - name: canary-hash
+            valueFrom:
+              podTemplateHashValue: Latest
+{{- end }}          
