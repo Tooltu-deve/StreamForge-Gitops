@@ -1,6 +1,6 @@
 name: upload
-image: { repo: "252773257724.dkr.ecr.ap-southeast-1.amazonaws.com/streamforge-dev/upload", tag: "dev" }
-serviceAccount: { roleArn: "arn:aws:iam::252773257724:role/sf-upload-5bbc6cde495948cc46fac07f89" }
+image: {repo: "252773257724.dkr.ecr.ap-southeast-1.amazonaws.com/streamforge-dev/upload", tag: "sha-ac82937c3ddd"}
+serviceAccount: {roleArn: "arn:aws:iam::252773257724:role/sf-upload-5bbc6cde495948cc46fac07f89"}
 env:
   REGION: ap-southeast-1
   RAW_BUCKET: "streamforge-dev-raw"

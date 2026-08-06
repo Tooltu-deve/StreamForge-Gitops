@@ -1,6 +1,6 @@
 name: playback
-image: { repo: "252773257724.dkr.ecr.ap-southeast-1.amazonaws.com/streamforge-dev/playback", tag: "dev" }
-serviceAccount: { roleArn: "arn:aws:iam::252773257724:role/sf-playback-3a9175593d7eceb99a9a7a505c" }
+image: {repo: "252773257724.dkr.ecr.ap-southeast-1.amazonaws.com/streamforge-dev/playback", tag: "sha-ac82937c3ddd"}
+serviceAccount: {roleArn: "arn:aws:iam::252773257724:role/sf-playback-3a9175593d7eceb99a9a7a505c"}
 env:
   REGION: ap-southeast-1
   RAW_BUCKET: "streamforge-dev-raw"
